@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.neoranga55.dagger2example.MainActivity;
+import com.neoranga55.dagger2example.Preferences;
 
 import javax.inject.Singleton;
 
@@ -17,5 +18,5 @@ public interface ApplicationComponent {
     //Exposed to sub-graphs.
     Context context();
     SharedPreferences sharedPreferences();
-//    Preferences preferences();
+    Preferences preferences();
 }
