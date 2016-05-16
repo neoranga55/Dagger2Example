@@ -3,6 +3,7 @@ package com.neoranga55.dagger2example.dependency.injection;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.neoranga55.dagger2example.MyApplication;
 import com.neoranga55.dagger2example.Preferences;
@@ -15,21 +16,18 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final MyApplication mApplication;
+    private final Context mAppContext;
 
-    public ApplicationModule(final MyApplication application) {
-        mApplication = application;
+    public ApplicationModule(final Context context) {
+        mAppContext = context.getApplicationContext();
     }
 
     @Provides @Singleton public Context provideApplicationContext() {
-        return mApplication.getApplicationContext();
+        return mAppContext;
     }
 
-    @Singleton @Provides SharedPreferences provideSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(mApplication.getApplicationContext());
-    }
-
-    @Singleton @Provides Preferences providePreferences() {
-        return new Preferences(provideSharedPreferences());
+    @Singleton @Provides SharedPreferences provideSharedPreferences(final Context context) {
+        Log.v("ApplicationModule", "Generating SharedPreferences for the first time");
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 }

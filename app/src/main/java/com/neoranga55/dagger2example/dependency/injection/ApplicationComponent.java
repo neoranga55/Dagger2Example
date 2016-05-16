@@ -13,10 +13,10 @@ import dagger.Component;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-    void inject(MainActivity activity);
+    void injectActivity(MainActivity activity);
 
     //Exposed to sub-graphs.
-    Context context();
-    SharedPreferences sharedPreferences();
+//    Context context();
+//    SharedPreferences sharedPreferences();
     Preferences preferences();
 }

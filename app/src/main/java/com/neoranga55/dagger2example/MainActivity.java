@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.neoranga55.dagger2example.dependency.injection.ActivityModule;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
 
 import javax.inject.Inject;
@@ -19,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getApplicationComponent().inject(this);
+        getApplicationComponent().injectActivity(this);
 
+        Log.v(TAG, "Requesting SharedPreferences for the second time");
         mPreferences.log(Preferences.FIRST_START_PREFERENCE, true);
         mPreferences.list();
         Log.v(TAG, "Executed until the end of Activity's onCreate");
@@ -28,9 +28,5 @@ public class MainActivity extends AppCompatActivity {
 
     protected ApplicationComponent getApplicationComponent() {
         return ((MyApplication)getApplication()).getApplicationComponent();
-    }
-
-    protected ActivityModule getActivityModule() {
-        return new ActivityModule(this);
     }
 }
