@@ -1,4 +1,4 @@
-package com.neoranga55.dagger2example;
+package com.neoranga55.repository;
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -17,11 +17,11 @@ public class Preferences {
     public static final String FIRST_START_PREFERENCE = "First Application Started";
 
     @Inject
-    public Preferences(SharedPreferences prefs) {
+    Preferences(SharedPreferences prefs) {
         mPreferences = prefs;
     }
 
-    public void log(final String preference, final boolean value) {
+    public void store(final String preference, final boolean value) {
         SharedPreferences.Editor edit = mPreferences.edit();
         edit.putBoolean(preference, value);
         edit.apply();

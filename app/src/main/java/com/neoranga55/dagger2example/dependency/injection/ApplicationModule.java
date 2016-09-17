@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.neoranga55.dagger2example.MyApplication;
-import com.neoranga55.dagger2example.Preferences;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

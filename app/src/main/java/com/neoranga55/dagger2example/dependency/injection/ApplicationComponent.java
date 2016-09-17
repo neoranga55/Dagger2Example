@@ -1,7 +1,7 @@
 package com.neoranga55.dagger2example.dependency.injection;
 
 import com.neoranga55.dagger2example.MainActivity;
-import com.neoranga55.dagger2example.Preferences;
+import com.neoranga55.repository.Preferences;
 
 import javax.inject.Singleton;
 

@@ -6,6 +6,8 @@ import android.util.Log;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationModule;
 import com.neoranga55.dagger2example.dependency.injection.DaggerApplicationComponent;
+import com.neoranga55.repository.Preferences;
+
 
 public class MyApplication extends Application {
 
