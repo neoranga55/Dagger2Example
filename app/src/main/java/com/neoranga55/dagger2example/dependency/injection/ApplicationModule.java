@@ -22,11 +22,13 @@ public class ApplicationModule {
         mAppContext = context.getApplicationContext();
     }
 
-    @Provides @Singleton public Context provideApplicationContext() {
+    @Singleton @Provides
+    Context provideApplicationContext() {
         return mAppContext;
     }
 
-    @Singleton @Provides SharedPreferences provideSharedPreferences(final Context context) {
+    @Singleton @Provides
+    SharedPreferences provideSharedPreferences(final Context context) {
         Log.v("ApplicationModule", "Generating SharedPreferences for the first time");
         return PreferenceManager.getDefaultSharedPreferences(context);
     }

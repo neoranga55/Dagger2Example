@@ -20,7 +20,7 @@ public class MyApplication extends Application {
 
     private void initializeInjector() {
         mApplicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this.getApplicationContext()))
+                .applicationModule(new ApplicationModule(this))
                 .build();
         Log.v(TAG, "Requesting SharedPreferences for the first time");
         final Preferences preferences = mApplicationComponent.preferences();
