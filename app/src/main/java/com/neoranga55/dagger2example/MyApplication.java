@@ -3,11 +3,8 @@ package com.neoranga55.dagger2example;
 import android.app.Application;
 import android.util.Log;
 
-import com.neoranga55.dagger2example.dependency.injection.ActivityComponent;
-import com.neoranga55.dagger2example.dependency.injection.ActivityModule;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationModule;
-import com.neoranga55.dagger2example.dependency.injection.DaggerActivityComponent;
 import com.neoranga55.dagger2example.dependency.injection.DaggerApplicationComponent;
 import com.neoranga55.repository.Preferences;
 
@@ -17,7 +14,6 @@ public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
 
     private static ApplicationComponent mApplicationComponent;
-    private static ActivityComponent mActivityComponent;
 
     @Override public void onCreate() {
         super.onCreate();
@@ -28,17 +24,11 @@ public class MyApplication extends Application {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
-        mActivityComponent = DaggerActivityComponent.builder()
-                .applicationComponent(mApplicationComponent)
-                .build();
         Log.v(TAG, "Requesting SharedPreferences for the first time");
         final Preferences preferences = mApplicationComponent.preferences();
     }
 
     public ApplicationComponent getApplicationComponent() {
         return mApplicationComponent;
-    }
-    public ActivityComponent getActivityComponent() {
-        return mActivityComponent;
     }
 }

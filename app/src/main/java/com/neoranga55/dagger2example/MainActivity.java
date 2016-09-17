@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.neoranga55.dagger2example.dependency.injection.ActivityComponent;
+import com.neoranga55.dagger2example.dependency.injection.ActivityModule;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
+import com.neoranga55.dagger2example.dependency.injection.DaggerActivityComponent;
+import com.neoranga55.repository.BigObject;
 import com.neoranga55.repository.Preferences;
 
 import javax.inject.Inject;
@@ -18,13 +21,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     @Inject
     Preferences mPreferences;
+    @Inject
+    BigObject mBigObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        getApplicationComponent().inject(this);
         getActivityComponent().inject(this);
 
         Log.v(TAG, "Requesting SharedPreferences for the second time");
@@ -40,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected ActivityComponent getActivityComponent() {
-        return ((MyApplication)getApplication()).getActivityComponent();
+        return DaggerActivityComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(new ActivityModule())
+                .build();
     }
 
     public void mClickListener(View v) {
