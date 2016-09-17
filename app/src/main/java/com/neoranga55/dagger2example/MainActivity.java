@@ -1,10 +1,13 @@
 package com.neoranga55.dagger2example;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import com.neoranga55.dagger2example.dependency.injection.ActivityComponent;
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
 import com.neoranga55.repository.Preferences;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        getApplicationComponent().inject(this);
-        ((MyApplication)getApplication()).getActivityComponent().inject(this);
+        getActivityComponent().inject(this);
 
         Log.v(TAG, "Requesting SharedPreferences for the second time");
         mPreferences.store(Preferences.FIRST_START_PREFERENCE, true);
@@ -34,5 +37,19 @@ public class MainActivity extends AppCompatActivity {
 
     protected ApplicationComponent getApplicationComponent() {
         return ((MyApplication)getApplication()).getApplicationComponent();
+    }
+
+    protected ActivityComponent getActivityComponent() {
+        return ((MyApplication)getApplication()).getActivityComponent();
+    }
+
+    public void mClickListener(View v) {
+        switch (v.getId()) {
+            case R.id.button:
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                break;
+            default:
+                break;
+        }
     }
 }
