@@ -3,6 +3,7 @@ package com.neoranga55.dagger2example;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.neoranga55.dagger2example.dependency.injection.ApplicationComponent;
 import com.neoranga55.repository.Preferences;
@@ -20,12 +21,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getApplicationComponent().injectActivity(this);
+//        getApplicationComponent().inject(this);
+        ((MyApplication)getApplication()).getActivityComponent().inject(this);
 
         Log.v(TAG, "Requesting SharedPreferences for the second time");
         mPreferences.store(Preferences.FIRST_START_PREFERENCE, true);
-        mPreferences.list();
+        int size = mPreferences.list();
         Log.v(TAG, "Executed until the end of Activity's onCreate");
+        TextView textView = (TextView) findViewById(R.id.tv_text);
+        textView.setText(textView.getText() + " - Amount of preferences stored: " + size);
     }
 
     protected ApplicationComponent getApplicationComponent() {

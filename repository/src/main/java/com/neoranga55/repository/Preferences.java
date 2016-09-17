@@ -27,10 +27,11 @@ public class Preferences {
         edit.apply();
     }
 
-    public void list() {
+    public int list() {
         Log.v(TAG, "Logging all preferences:");
 
         for (Map.Entry entry : mPreferences.getAll().entrySet())
             Log.v(getClass().getSimpleName(), entry.getKey() + " = " + entry.getValue());
+        return mPreferences.getAll().size();
     }
 }
