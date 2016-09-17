@@ -1,8 +1,5 @@
 package com.neoranga55.dagger2example.dependency.injection;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import com.neoranga55.dagger2example.MainActivity;
 import com.neoranga55.dagger2example.Preferences;
 
